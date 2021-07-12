@@ -35,10 +35,23 @@ const MonthText = styled.div`
 	padding-left: 10px;
 `;
 
+const Card = styled.div`
+	box-sizing: border-box;
+	width: 400px;
+	margin: 0 auto;
+	border-radius: 25px;
+	border-radius: 25px;
+	color: white;
+	float: center
+	box-shadow: 5px 5px 10px #ccc;
+	background: linear-gradient(150deg, #f731db, #4600f1 100%);
+`;
+
 const Calendar = (props) => {
 	const [selectedDate, setSelectedDate] = useState(new Date());
 	const [dates, setDates] = useState([]);
 	const [stepData, setStepData] = useState(props.stepData);
+	const [userDetails, setUserDetails] = useState(props.userDetails);
 	const [calendar, setCalendar] = useState({
 		month: selectedDate.getMonth(),
 		year: selectedDate.getFullYear(),
@@ -61,6 +74,7 @@ const Calendar = (props) => {
 			previousYear,
 		});
 		setStepData(props.stepData);
+		setUserDetails(props.userDetails);
 	}, [props]);
 
 	const onClickNext = () => {
@@ -103,6 +117,29 @@ const Calendar = (props) => {
 
 	return (
 		<div style={{ width: "100%", paddingTop: 50 }}>
+			<div>
+				<Card>
+					<div style={{ padding: 10 }}>
+						<p style={{ fontSize: 17 }}>Welcome {userDetails.name},</p>
+						<p>You can view your checkins and manage your preferences.</p>
+						<p style={{ fontWeight: "lighter" }}>
+							We will notify you when something changes with your health.
+						</p>
+					</div>
+				</Card>
+			</div>
+			<br></br>
+			<div
+				style={{
+					paddingTop: 10,
+					paddingBottom: 10,
+					paddingLeft: 40,
+					fontSize: 18,
+					color: "black",
+				}}
+			>
+				Last Check in
+			</div>
 			<Container>
 				<div style={{ padding: 10 }}>
 					<div onClick={onClickPrevious} style={{ float: "left" }}>

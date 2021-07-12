@@ -6,9 +6,11 @@ const { check } = require("../Utility/DataRequestManager");
 const DashboardNew = (props) => {
 	const [accessToken, setAccessToken] = useState(props.accessToken);
 	const [stepData, setStepData] = useState([]);
+	const [userDetails, setUserDetails] = useState(props.userDetails);
 	useEffect(() => {
 		console.log("useEffect is called");
 		setAccessToken(props.accessToken);
+		setUserDetails(props.userDetails);
 		getStepPoints(props.accessToken);
 	}, [props]);
 	const getStepPoints = (accessToken) => {
@@ -77,7 +79,7 @@ const DashboardNew = (props) => {
 	};
 	return (
 		<div style={{ backgroundColor: "#FAF9F9", height: "100%" }}>
-			{/*Dashboard rendered {accessToken}*/}
+			{console.log(userDetails)}
 			{/*stepData.map((step) => (
 				<div key={step.step}>
 					{step.date} <br></br>
@@ -85,13 +87,13 @@ const DashboardNew = (props) => {
 				</div>
 			))*/}
 			<div>
-				{accessToken ? (
-					<Calendar stepData={stepData} />
+				{accessToken && userDetails ? (
+					<Calendar stepData={stepData} userDetails={userDetails} />
 				) : (
 					<div
 						style={{
 							backgroundColor: "#FAF9F9",
-							height: 500,
+							height: 420,
 						}}
 					>
 						<center>Please log in to see your progress!</center>

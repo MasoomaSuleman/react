@@ -6,15 +6,18 @@ const CLIENT_ID =
 	"110853295632-d5tutra5bb09d26h13ok9jhr39b5s8s4.apps.googleusercontent.com";
 const LoginNew = () => {
 	const [user, setUser] = useState();
+	const [userDetails, setUserDetails] = useState();
 	const onSuccess = (res) => {
 		console.log("[login success] current user: ", res.profileObj);
 		console.log("complete information: ", res.accessToken);
 		refreshTokenSetup(res);
 		setUser(res.accessToken);
+		setUserDetails(res.profileObj);
 	};
 	const onLogout = () => {
 		console.log("Logout made successfully");
 		setUser(null);
+		setUserDetails(null);
 	};
 	function handleLoginFailure(response) {
 		alert("Failed to log in");
@@ -55,14 +58,28 @@ const LoginNew = () => {
 				</div>
 				<div style={{ float: "right" }}>
 					<i
-						className="fa fa-bell fa-lg"
+						className="fa fa-bell-o fa-lg"
 						aria-hidden="true"
-						style={{ color: "black" }}
+						style={{
+							color: "black",
+							display: "block",
+							width: 8,
+							height: 8,
+							backgroundColor: "red",
+							bottom: 4,
+							right: 10,
+							top: 0,
+							left: 0,
+							borderRadius: "50%",
+						}}
 					></i>
 				</div>
 			</nav>
 			<div>
-				<DashboardNew accessToken={user}></DashboardNew>
+				<DashboardNew
+					accessToken={user}
+					userDetails={userDetails}
+				></DashboardNew>
 			</div>
 		</div>
 	);
